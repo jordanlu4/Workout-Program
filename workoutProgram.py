@@ -298,3 +298,5 @@ def build():
             print("That's not a valid day of the week. Please enter a valid day.")
 
 build()
+
+# Test
