@@ -225,7 +225,82 @@ def rest():
 
 
 
-# def pull():    
+def pull():
+    back1 = "Neutral Grip Lateral Pull-Downs"
+    bicep1 = "Preacher Curls (Machine)"
+    shoulder = "Shoulder Flys (Cable)"
+    back2 = "Neutral Grip Rows (Machine)"
+    bicep2 = "Hammer Curls (Cable)"
+    back3 = "Pronated Grip Rows (Smith Machine)"
+
+    pull_exercises = {
+        "Neutral Grip Lateral Pull-Downs": ["Pronated Grip Lateral Pull-Downs"],
+        "Preacher Curls (Machine)": ["Preacher Curls (Dumbbell)", "'Spider' Curls (Dumbbell)"],
+        "Shoulder Flys (Cable)": ["Shoulder Flys (Dumbbell)"],
+        "Neutral Grip Rows (Machine)": ["Neutral Grip Farmer Rows (Dumbbell)", "Neutral Grip Rows (Cable)"],
+        "Hammer Curls (Cable)": ["Hammer Curls (Dumbbell)"],
+        "Pronated Grip Rows (Smith Machine)": ["Pronated Grip Rows (Barbell)", "Chest-Supported Pronated Grip Rows (Dumbbells)"]
+    }
+
+    while True:
+        print(f"Pull Workout:\n1. {back1}\n2. {bicep1}\n3. {shoulder}\n4. {back2}\n5. {bicep2}\n6. {back3}")
+        user_in = input("\nStart: Start Workout\nSwap: Swap an exercise\nPlease choose 'Start' or 'Swap': ").lower()
+
+        if user_in == "swap":
+            swap_choice = input("Which exercise would you like to swap? (1, 2, 3, 4, 5, or 6): ")
+            if swap_choice in ["1", "2", "3", "4", "5", "6"]:
+                chosen_exercise = {
+                    "1": back1,
+                    "2": bicep1,
+                    "3": shoulder,
+                    "4": back2,
+                    "5": bicep2,
+                    "6": back3
+                }[swap_choice]
+
+                print(f"Alternatives for {chosen_exercise}:")
+                for i, alternative in enumerate(pull_exercises[chosen_exercise], 1):
+                    print(f"{i}. {alternative}")
+
+                alternative_choice = input("Please choose an alternative: ")
+                try:
+                    alternative_choice = int(alternative_choice) - 1
+                    new_exercise = pull_exercises[chosen_exercise][alternative_choice]
+
+                    if swap_choice == "1":
+                        back1 = new_exercise
+                    elif swap_choice == "2":
+                        bicep1 = new_exercise
+                    elif swap_choice == "3":
+                        shoulder = new_exercise
+                    elif swap_choice == "4":
+                        back2 = new_exercise
+                    elif swap_choice == "5":
+                        bicep2 = new_exercise
+                    elif swap_choice == "6":
+                        back3 = new_exercise
+                except (ValueError, IndexError):
+                    print("Invalid choice.")
+                    continue  # Stay in the loop for another swap or start
+
+            else:
+                print("Invalid choice.")
+                continue  # Stay in the loop for another swap or start
+
+        elif user_in == "start":
+            # Here you can add the specific sets and repetitions for each exercise
+            print(f"{back1}\nSet 1: 8 Repetitions at 60% Intensity\nSet 2: 8-12 Repetitions at 80% Intensity\nSet 3: To Failure, but Minimum 8 Repetitions\nSet 4: To Failure, but Minimum 6 Repetitions")
+            print(f"{bicep1}\nSet 1: 8 Repetitions at 60% Intensity\nSet 2: To Failure, but Minimum 10 Repetitions\nSet 3: To Failure, but Minimum 8 Repetitions")
+            print(f"{shoulder}\nSet 1: 8 Repetitions at 60% Intensity\nSet 2: To Failure, but Minimum 10 Repetitions\nSet 3: To Failure, but Minimum 10 Repetitions")
+            print(f"{back2}\nSet 1: 8 Repetitions at 60% Intensity\nSet 2: 8 Repetitions at 80%\nSet 3: To Failure, but Minimum 8 Repetitions\nSet 4: To Failure, but Minimum 6 Repetitions")
+            print(f"{bicep2}\nSet 1: 8 Repetitions at 60% Intensity\nSet 2: To Failure, but Minimum 10 Repetitions\nSet 3: To Failure, but Minimum 8 Repetitions")
+            print(f"{back3}\nSet 1: To Failure, but Minimum 10 Repetitions\nSet 2: To Failure, but Minimum 10 Repetitions")
+
+            break  # Exit the loop to start the workout
+
+        else:
+            print("Invalid input. Please choose 'Start' or 'Swap'.")
+
 
 def build():
     workout = {
